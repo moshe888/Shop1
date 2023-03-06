@@ -1,0 +1,66 @@
+/* Set background color */
+body {
+    background-color: #baa2a248;
+  }
+  
+  /* Set margin and padding for container */
+  .container {
+  
+  }
+  
+  .card {
+     
+    border-radius: 0.25rem;
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.35);
+    margin-bottom: 0.5rem;
+     }
+  
+  /* Set the width and height of the product image */
+  .card-img-top {
+   }
+  
+  /* Set font size for card title */
+  .card-title {
+    font-size: 20px;
+  }
+  
+  /* Set margin and padding for card text */
+  .card-text {
+    margin-bottom: 0;
+    padding-top: 5px;
+  }
+  
+  /* Center the navbar */
+  .navbar-brand,
+  .navbar-nav {
+
+        /* margin: auto; */
+  }
+  
+  /* Set background color and padding for active nav link */
+  .nav-item.active .nav-link {
+    /* background-color: #5f424248;
+    color: #fff;
+    padding: 1px 1px;
+    border-radius: 10px; */
+  }
+  
+  /* Set hover effect for nav links */
+  .nav-item:hover .nav-link {
+    /* color: #5f424248; */
+  }
+  
+  .btn{
+    background-color: #472f2f48;
+  }
+  .btn:hover{
+    color: #230c0c48;
+  }
+  /* Set margin and padding for footer */
+  footer {
+    margin-top: 2px;
+    padding: 1px;
+    background-color: #fff;
+    text-align: center;
+  }
+  

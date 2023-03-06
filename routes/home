@@ -1,0 +1,20 @@
+
+const express = require("express")
+const home = express.Router();
+const Product = require("../models/Product");
+ 
+
+home.post('/home',async(req, res, next) => {
+   const products = await Product.find();
+      res.render("cart" , {   prods: products }); 
+})
+ 
+home.get('/home',async(req, res, next) => {
+    const products = await Product.find();
+       res.render("home" , {   prods: products }); 
+})
+home.get('/about',async(req, res, next) => {
+       res.render("about"  ); 
+   })
+  
+    module.exports = home

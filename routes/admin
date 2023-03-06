@@ -1,0 +1,69 @@
+const express = require('express');
+const router = express.Router();
+const Product = require('../models/Product');
+
+// Route to display all products
+router.get('/products', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.render('admin/products', { products });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Route to add a new product
+router.get('/add-product', (req, res) => {
+  res.render('admin/add-product');
+});
+
+// Route to handle adding a new product
+router.post('/add-product', async (req, res) => {
+  try {
+    const { name, description, price, imageUrl } = req.body;
+    const product = new Product({ name, description, price, imageUrl });
+    await product.save();
+    res.redirect('/products');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Route to edit a product (display edit form)
+router.get('/edit-product/:id', async (req, res) => {
+  const productId = req.params.id;
+  try {
+    const product = await Product.findById(productId);
+    res.render('admin/edit-product', { product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Route to handle editing a product
+router.post('/edit-product/:id', async (req, res) => {
+  const productId = req.params.id;
+  try {
+    const { name, description, price, imageUrl } = req.body;
+    await Product.findByIdAndUpdate(productId, { name, description, price, imageUrl });
+    res.redirect('/products');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+router.post('/delete-product/:id', async (req, res) => {
+  const productId = req.params.id;
+  try {
+     await Product.findByIdAndDelete(productId );
+    res.redirect('/products');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+module.exports = router;
