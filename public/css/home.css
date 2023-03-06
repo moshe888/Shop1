@@ -9,15 +9,16 @@ body {
   }
   
   .card {
-     
-    border-radius: 0.25rem;
+      border-radius: 0.25rem;
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.35);
     margin-bottom: 0.5rem;
      }
   
   /* Set the width and height of the product image */
-  .card-img-top {
-   }
+  .card-img-top  {
+    border-radius: 4px;
+    }
+ 
   
   /* Set font size for card title */
   .card-title {
@@ -62,5 +63,7 @@ body {
     padding: 1px;
     background-color: #fff;
     text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
   

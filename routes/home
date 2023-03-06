@@ -6,14 +6,106 @@ const Product = require("../models/Product");
 
 home.post('/home',async(req, res, next) => {
    const products = await Product.find();
-      res.render("cart" , {   prods: products }); 
+      // res.render("cart" , {   prods: products }); 
 })
  
 home.get('/home',async(req, res, next) => {
     const products = await Product.find();
        res.render("home" , {   prods: products }); 
 })
-home.get('/about',async(req, res, next) => {
+
+home.post('/cart/checkout', (req, res) => {
+   const cart = req.session.cart || {};
+ 
+   // create an order object that contains the products and quantities from the cart
+   const order = {
+     products: [],
+     total: 0,
+     shippingAddress: req.body.shippingAddress,
+     billingAddress: req.body.billingAddress,
+     // add other relevant information here
+   };
+ 
+   for (const productId in cart) {
+     const item = cart[productId];
+     order.products.push({
+       name: item.product.name,
+       price: item.product.price,
+       quantity: item.quantity
+     });
+     order.total += item.product.price * item.quantity;
+   }
+ 
+   // save the order to the database or some other storage
+   // clear the cart from the session object
+   delete req.session.cart;
+ 
+   // redirect to the order confirmation page
+   res.redirect('/order-confirmation');
+ });
+ 
+
+
+home.get('/cart', (req, res) => {
+  if (!req.session.cart) {
+    req.session.cart = {};
+  }
+   const cart = req.session.cart || {};
+ 
+   // calculate the total price of the cart
+   let totalPrice = 0;
+   for (const productId in cart) {
+     const item = cart[productId];
+     totalPrice += item.product.price * item.quantity;
+   }
+ 
+   res.render("cart", {
+     cart: cart,
+     totalPrice: totalPrice
+   });
+ });
+ 
+home.post('/cart/add', (req, res) => {
+   const productId = req.body.productId;
+   const quantity = req.body.quantity;
+ 
+   // get the cart from the session object, or create a new one
+   let cart = req.session.cart || {};
+ 
+   // add the product to the cart, or update the quantity if it already exists
+   if (cart[productId]) {
+     cart[productId].quantity += parseInt(quantity);
+   } else {
+   //   cart[productId] = {
+   //     quantity: parseInt(quantity),
+   //     product: // get product data from database or some other source
+   //   };
+   }
+ 
+   // save the updated cart to the session object
+   req.session.cart = cart;
+ 
+   // redirect to the cart page
+   res.redirect('/cart');
+});
+ 
+
+home.get('/home/:id', async (req, res) => {
+  console.log('kjgfhdasfggdhfgkh.gdfszvnhjh.hdfzdafsryt,fhxbcngfrytfhdhf')
+
+  try {
+    const product = await Product.findById(req.params.id);
+    res.render('product-details', { product });
+  } catch (err) {
+    console.error(err);
+    res.redirect('/home');
+  }
+});
+
+
+
+
+home.get('/about/"id',async(req, res, next) => {
        res.render("about"  ); 
    })
   

@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
  // app.use(cors())
  
 app.use(home)
-// Mount the router at the /admin URL
-app.use( router);
+app.use(router);
+ 
 
 const start = async () => {
     try {
@@ -34,5 +34,8 @@ const start = async () => {
          console.log(err);
     }
 };
+app.use((req, res) => {
+    res.status(404).send("Page not found");
+  });
 
 start();
