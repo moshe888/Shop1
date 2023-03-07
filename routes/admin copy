@@ -56,30 +56,41 @@ router.post('/add-product/:id', async (req, res) => {
   }
 });
 
-// Route to edit a product (display edit form)
-// router.get('/edit-product/:id', async (req, res) => {
-//   const productId = req.params.id;
-//   try {
-//     const product = await Product.findById(productId);
-//     res.render('admin/edit-product', { product });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Server Error');
-//   }
-// });
+ router.get('/edit-product/:idStore/:idProduct', async (req, res) => {
+   const productId = req.params.idProduct;
+   const storeId = req.params.idStore;
+
+  try {
+    const store = await Store.findById(storeId);
+    const product = await store.products.id(productId);
+    res.render('admin copy/edit-product', { store , product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
 
 // // Route to handle editing a product
-// router.post('/edit-product/:id', async (req, res) => {
-//   const productId = req.params.id;
-//   try {
-//     const { name, description, price, imageUrl } = req.body;
-//     await Product.findByIdAndUpdate(productId, { name, description, price, imageUrl });
-//     res.redirect('/products');
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Server Error');
-//   }
-// });
+router.post('/edit-product/:idStore/:idProduct', async (req, res) => {
+  const productId = req.params.idProduct;
+  const storeId = req.params.idStore;
+  try {
+    const store = await Store.findById(storeId);
+
+    const { name, description, price, imageUrl } = req.body;
+    const updatedProduct = { name, description, price, imageUrl };
+    store.products.splice(productId, 1, updatedProduct);
+    await store.save();
+
+    res.redirect(`/stores/${storeId}`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
 // router.post('/delete-product/:id', async (req, res) => {
 //   const productId = req.params.id;
 //   try {

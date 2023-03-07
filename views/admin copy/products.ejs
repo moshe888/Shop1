@@ -24,7 +24,7 @@
             <img class="card-img-top" style="height: 3cm;width: 3cm; " src="<%= product.imageUrl %>" alt="<%= product.name %>"  ">
           </td>
           <td>
-            <a href="/edit-product/<%= product._id %>" class="btn btn-primary btn-sm mr-2">Edit</a>
+            <a href="/edit-product/<%= store._id %>/<%= product._id %>" class="btn btn-primary btn-sm mr-2">Edit</a>
             <form method="POST" action="/delete-product/<%= product._id %>" class="d-inline">
               <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>

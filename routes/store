@@ -3,6 +3,8 @@ const router = express.Router();
 const Store = require('../models/Store');
 const Product = require("../models/Product");
 
+ 
+
 
 // Display all stores
 router.get('/stores', async (req, res) => {
