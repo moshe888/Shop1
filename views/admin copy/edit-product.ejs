@@ -1,0 +1,29 @@
+<!-- views/admin/edit-product.ejs -->
+   <a href="/home">home</a>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <h1>Edit Product</h1>
+  <form method="POST" action="/edit-product/<%= product._id %>">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>">
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description"><%= product.description %></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= product.price %>">
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Image URL:</label>
+      <input type="text" class="form-control" id="imageUrl" name="imageUrl" required>
+    </div>
+    <!-- <div class="form-group">
+      <label for="imageUrl">Image:</label>
+      <input type="file" class="form-control-file" id="imageUrl" name="imageUrl">
+    </div> -->
+    <button type="submit" class="btn btn-primary">Update Product</button>
+  </form>
+  

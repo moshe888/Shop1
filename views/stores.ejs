@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+<main>
+  <h1>Stores</h1>
+  <a href="/stores/new">add store</a>
+  <p>Here are the stores:</p>
+  <ul>
+    <% stores.forEach((store) => { %>
+      <li>
+        <h3><%= store.name %></h3>
+        <p><%= store.description %></p>
+         <p><strong>Link:</strong> <a href="/stores/<%= store._id %>"><%= store.name %></a></p>
+      </li>
+    <% }); %>
+  </ul>
+</main>
+<%- include('partials/footer') %>

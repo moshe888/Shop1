@@ -1,11 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 // const cors = require("cors");
- const path = require('path');
+const path = require('path');
+const session = require('express-session');
+
 const bodyParser = require("body-parser");
 const app = express(); // init express app
+
+const adminC = require('./routes/admin copy')
 const home = require('./routes/home');
-const router = require('./routes/admin')
+const admin = require('./routes/admin')
+const store  = require('./routes/store');
  
  
 app.set('view engine', 'ejs');
@@ -13,11 +18,18 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'some secret',
+    resave: false,
+    saveUninitialized: true
+  }));
 
  // app.use(cors())
  
-app.use(home)
-app.use(router);
+app.use(home);
+app.use(admin);
+app.use(store);
+app.use(adminC)
  
 
 const start = async () => {
