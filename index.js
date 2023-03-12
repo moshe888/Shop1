@@ -27,6 +27,7 @@ app.use(session({
  // app.use(cors())
  
 app.use(home);
+
 app.use(admin);
 app.use(store);
 app.use(adminC)
@@ -36,8 +37,7 @@ const start = async () => {
     try {
         await mongoose.connect(
             "mongodb://localhost:27017/shop1",{useNewUrlParser:true}
-            // "mongodb+srv://moshe:228822@cluster0.eaaqo9b.mongodb.net/test" 
-
+ 
 
           );
          console.log("succsessfuly connected to mongodb");
