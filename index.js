@@ -7,9 +7,9 @@ const session = require('express-session');
 const bodyParser = require("body-parser");
 const app = express(); // init express app
 
-const adminC = require('./routes/admin copy')
+const adminC = require('./routes/admin')
 const home = require('./routes/home');
-const admin = require('./routes/admin')
+// const admin = require('./routes/admin')
 const store  = require('./routes/store');
  
  
@@ -28,7 +28,7 @@ app.use(session({
  
 app.use(home);
 
-app.use(admin);
+// app.use(admin);
 app.use(store);
 app.use(adminC)
  
